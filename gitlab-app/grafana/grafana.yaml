@@ -1,0 +1,18 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: gitlab-demo
+  namespace: grafana-monitor
+  labels:
+    app: gitlab-demo
+    prometheus: grafana-prometheus
+spec:
+  selector:
+    matchLabels:
+      app: gitlab-demo
+  namespaceSelector:
+    matchNames:
+    - gitlab-demo
+  endpoints:
+  - port: http-metrics
+    interval: 15s
